@@ -40,6 +40,9 @@ fastify.get('/user/:id', (request, reply) => {
 fastify.get('/users', (request, reply) => {
   const {filter,value} = request.query;
   let result = Object.values(users);
+  if(+value){
+    return result.filter((user) => user[filter] === +value);
+  }
   if (filter && value) {
     return result.filter((user) => user[filter] === value);
   }
